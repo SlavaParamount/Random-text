@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jokes',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +73,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'jokes_project.wsgi.application'
+ASGI_APPLICATION = 'jokes_project.asgi.application'
 
 CELERY_BROKER_URL = 'redis://localhost:6379'
 
@@ -83,6 +85,15 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)]
+        }
     }
 }
 

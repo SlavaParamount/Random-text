@@ -10,9 +10,18 @@
 <div class="container">
     <div class="row">
         <div class="col-6 mx-auto mt-5">
-            <h3 id="jokes">{{ word }}</h3>
+            <h3 id="jokes"></h3>
         </div>
     </div>
 </div>
+<script>
+    var socket = new WebSocket('ws://localhost:8000/ws/jokes/');
+
+    socket.onmessage = function(event) {
+        var joke = event.data;
+        console.log(event.data, joke)
+        document.querySelector("#jokes").innerText = joke;
+    }
+</script>
 </body>
 </html>
